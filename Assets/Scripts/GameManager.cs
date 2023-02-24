@@ -21,4 +21,9 @@ public class GameManager : MonoBehaviour
     {
         player.TargetPos = targetPos;
     }
+
+    public void EndTurn()
+    {
+        player.ResetActionPoints();
+    }
 }
