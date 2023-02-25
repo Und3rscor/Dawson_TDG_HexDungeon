@@ -12,11 +12,24 @@ public class Player : MonoBehaviour
 
     public int startingActionPoints;
     private int actionPoints;
+    public int ActionPoints
+    {
+        get { return actionPoints;}
+
+        set
+        {
+            actionPoints = value;
+        }
+    }
 
     private bool moving;
+    public bool Moving
+    {
+        get { return moving; }
+    }
 
-    private Vector3 targetPos;
-    public Vector3 TargetPos
+    private Vector3Int targetPos;
+    public Vector3Int TargetPos
     {
         set
         {
@@ -34,7 +47,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         actionPoints = startingActionPoints;
-        targetPos = transform.position;
+        targetPos = Vector3Int.FloorToInt(transform.position);
 
         apCounter = GetComponentInChildren<TextMeshProUGUI>();
         apSlider = GetComponentInChildren<Slider>();
@@ -44,32 +57,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        PlayerControler();
+        //PlayerControler();
         APTracker();
     }
 
     private void PlayerControler()
     {
-        if (targetPos != transform.position)
+        if (targetPos != Vector3Int.FloorToInt(transform.position))
         {
             if (!moving)
             {
                 actionPoints--;
             }
 
-            MovePlayer();
+            //Move
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            moving = true;
         }
 
-        if (moving && targetPos == transform.position && actionPoints != 0)
+        if (moving && targetPos == Vector3Int.FloorToInt(transform.position) && actionPoints != 0)
         {
             moving = false;
         }
-    }
-
-    private void MovePlayer()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-        moving = true;
     }
 
     public void ResetActionPoints()

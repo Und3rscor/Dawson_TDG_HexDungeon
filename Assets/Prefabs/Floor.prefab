@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2331319892591031260}
   m_Layer: 0
   m_Name: greek_roof_support_1 (4)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +96,7 @@ GameObject:
   - component: {fileID: 6991440813027333191}
   m_Layer: 0
   m_Name: greek_roof_support_1 (6)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +145,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,7 +179,7 @@ GameObject:
   - component: {fileID: 6612825208627129363}
   m_Layer: 0
   m_Name: greek_roof_support_1 (7)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +228,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,7 +262,7 @@ GameObject:
   - component: {fileID: 5189974266083442537}
   m_Layer: 0
   m_Name: greek_roof_support_1 (1)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +311,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,7 +345,7 @@ GameObject:
   - component: {fileID: 8253118255036038125}
   m_Layer: 0
   m_Name: greek_roof_support_1 (3)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -398,7 +394,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -433,7 +428,7 @@ GameObject:
   - component: {fileID: 5203671741300687733}
   m_Layer: 0
   m_Name: greek_roof_support_1
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +477,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -517,7 +511,7 @@ GameObject:
   - component: {fileID: 7846158621309417346}
   m_Layer: 0
   m_Name: greek_roof_support_1 (5)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +560,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -601,7 +594,7 @@ GameObject:
   - component: {fileID: 4280393705115609846}
   m_Layer: 0
   m_Name: greek_roof_support_1 (2)
-  m_TagString: Untagged
+  m_TagString: Borders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -650,7 +643,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
-  - {fileID: 2100000, guid: e1ed4591f56c3bc4384370a32cbb05cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -684,7 +676,6 @@ GameObject:
   - component: {fileID: 7705239934680625167}
   - component: {fileID: -1025810885613621923}
   - component: {fileID: 294137489859534885}
-  - component: {fileID: 8583701481314511973}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -701,7 +692,7 @@ Transform:
   m_GameObject: {fileID: 9145594720427623966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6666667, y: 0.66666, z: 0.66666}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 202584272638753994}
@@ -728,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ce62485fc387d4ebf4471612fb8c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkable: 1
 --- !u!54 &-1025810885613621923
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -774,29 +766,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 0.5, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &8583701481314511973
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9145594720427623966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.5, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &207162026529797654
 PrefabInstance:
   m_ObjectHideFlags: 0

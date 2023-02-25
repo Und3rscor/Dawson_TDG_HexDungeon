@@ -6,10 +6,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Player player;
+    GridManager gridManager;
+
+    public bool start;
+
+    static GameManager instance;
 
     private void Start()
     {
         player = FindObjectOfType<Player>();
+        gridManager = FindObjectOfType<GridManager>();
     }
 
     private void Update()
@@ -17,9 +23,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void MovePlayer(Vector3 targetPos)
+    public void MovePlayer(Vector2Int displacement)
     {
-        player.TargetPos = targetPos;
+        gridManager.MoveObjectOnGrid(player.gameObject, displacement);
     }
 
     public void EndTurn()

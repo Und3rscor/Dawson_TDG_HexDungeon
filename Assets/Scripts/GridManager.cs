@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GridManager : MonoBehaviour
+{
+    [SerializeField]
+    private Grid grid;
+
+    [SerializeField]
+    private Vector2Int gridSize;
+
+    [SerializeField]
+    private Vector2Int startPoint;
+
+    [SerializeField]
+    private Vector2Int endPoint;
+
+    [SerializeField]
+    // private List<GridCell> _fullGrid = new List<GridCell>();
+    private Dictionary<Vector2Int, TileScript> fullGrid = new Dictionary<Vector2Int, TileScript>();
+
+    Player player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
+    private void Awake()
+    {
+        foreach (Transform tf in transform)
+        {
+            fullGrid.Add(ToGridCoord(grid.LocalToCell(tf.position)), tf.GetComponent<TileScript>());
+        }
+    }
+
+    private Vector2Int ToGridCoord(Vector3Int vect)
+    {
+        return new Vector2Int(vect.x, vect.z);
+    }
+
+    public Vector2Int MoveObjectOnGrid(GameObject obj, Vector2Int displacement)
+    {
+        Vector3Int currentPos = grid.WorldToCell(obj.transform.position);
+        Vector3Int targetPos = new Vector3Int(displacement.x, 0, displacement.y);
+
+        if (MoveObjectToGridPosition(obj, targetPos))
+        {
+            return ToGridCoord(targetPos);
+        }
+        return ToGridCoord(currentPos);
+    }
+
+    public bool MoveObjectToGridPosition(GameObject obj, Vector3Int targetPos)
+    {
+        if (Walkable(ToGridCoord(targetPos)))
+        {
+            obj.transform.position = grid.GetCellCenterLocal(targetPos);
+            Debug.Log("moving to" + targetPos);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool Walkable(Vector2Int newPosition)
+    {
+        if (fullGrid.ContainsKey(newPosition))
+        {
+            TileScript tile = fullGrid[newPosition];
+            return tile.Walkable;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
