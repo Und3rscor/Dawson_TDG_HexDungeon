@@ -25,7 +25,7 @@ public class TileScript : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         grid = GetComponentInParent<Grid>();
-        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager = FindObjectByType<GameManager>();
 
         isWithinWalkingDistance = false;
 
