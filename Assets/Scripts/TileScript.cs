@@ -19,8 +19,16 @@ public class TileScript : MonoBehaviour
     }
 
     private bool isWithinWalkingDistance;
+    public bool IsWithinWalkingDistance
+    {
+        get { return isWithinWalkingDistance;}
+    }
 
     private Vector3Int currentCellPositon;
+    public Vector3Int CurrentCellPositon
+    {
+        get { return currentCellPositon;}
+    }
 
     private void Start()
     {
@@ -36,17 +44,18 @@ public class TileScript : MonoBehaviour
     }
 
     //Checks for tiles within walking distance of an object based on their remaining AP
-    public void IsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
+    public void CheckIfTileIsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
     {
-        //Checks if within distance of the player and marks it accordingly
-        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= obj.GetComponent<Entity>().ActionPoints)
+        //Checks if within distance of the obj and marks it accordingly
+        if (!isWithinWalkingDistance && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= obj.GetComponent<Entity>().ActionPoints)
         {
             isWithinWalkingDistance = true;
 
+            //if it's the player that's asking, mark the tile blue
             if (obj.tag == "Player")
             {
                 ChangeBorderColor(Color.blue);
-            } 
+            }
         }
     }
 
@@ -73,7 +82,7 @@ public class TileScript : MonoBehaviour
         }
     }
 
-    public void ResetColor()
+    public void Reset()
     {
         //Makes all the tiles black except the one the player is trying to reach
         if (playerObj.GetComponent<Entity>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
         playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
         gridManager = FindObjectOfType<GridManager>();
 
+        playerTurn = true;
+
         if (instance != null)
         {
             Destroy(gameObject);
@@ -48,12 +50,13 @@ public class GameManager : MonoBehaviour
         if (playerTurn)
         {
             //Resets enemy AP
-            
+            playerTurn = false;
         }
         else
         {
             //Resets player AP
             playerEScript.ResetActionPoints();
+            playerTurn = true;
         }        
     }
 }

@@ -66,7 +66,6 @@ public class Entity : MonoBehaviour
 
     private bool walkablesTilesChecked;
 
-    GameManager gameManager;
     GridManager gridManager;
 
     Slider[] sliders;
@@ -75,8 +74,7 @@ public class Entity : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        gridManager = gameManager.gameObject.GetComponent<GridManager>();
+        gridManager = FindObjectOfType<GridManager>();
 
         apCounter = GetComponentInChildren<TextMeshProUGUI>();
         sliders = GetComponentsInChildren<Slider>();
@@ -89,27 +87,16 @@ public class Entity : MonoBehaviour
         apSlider.maxValue = startingActionPoints;
         actionPoints = startingActionPoints;
 
-        doneMoving = true;
         targetPos = this.transform.position;
         walkablesTilesChecked = false;        
     }
 
     private void Update()
-    {
-        if (this.tag == "Player" && gameManager.PlayerTurn)
-        {
-            PlayOnYourTurn();
-        }
-
-        if (this.tag == "Enemy" && !gameManager.PlayerTurn)
-        {
-            PlayOnYourTurn();
-        }
-        
+    {        
         HPTracker();
     }
 
-    private void PlayOnYourTurn()
+    public void PlayOnYourTurn()
     {
         Move();
 
@@ -130,6 +117,7 @@ public class Entity : MonoBehaviour
             if (!walkablesTilesChecked)
             {
                 gridManager.CheckIfTileIsWithinWalkingDistance(new Vector3(this.transform.position.x, 0, this.transform.position.z), this.gameObject);
+
                 walkablesTilesChecked = true;
             }
         }
@@ -140,10 +128,7 @@ public class Entity : MonoBehaviour
             {
                 walkablesTilesChecked = false;
 
-                if (this.gameObject.tag == "Player")
-                {
-                    gridManager.ResetTileColors();
-                }
+                gridManager.ResetTiles();
             }
         }
     }

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
-public class Player : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    GameManager gameManager;
+    [SerializeField]
+    private bool randomMovement;
+    public bool RandomMovement
+    {
+        get { return randomMovement; }
+    }
+
     Entity entity;
+    GameManager gameManager;
 
     private void Start()
     {
@@ -19,7 +22,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.PlayerTurn)
+        if (!gameManager.PlayerTurn)
         {
             entity.PlayOnYourTurn();
         }

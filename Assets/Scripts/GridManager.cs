@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,10 @@ public class GridManager : MonoBehaviour
     // private List<GridCell> _fullGrid = new List<GridCell>();
     private Dictionary<Vector2Int, TileScript> fullGrid = new Dictionary<Vector2Int, TileScript>();
 
-    Player player;
     private Vector3 objTargetGridPos, objTargetPos;
 
-    private void Start()
-    {
-        player = FindObjectOfType<Player>();
-    }
+    private int tileID = -1;
+    TileScript[] availableTilesToEnemy;
 
     private void Awake()
     {
@@ -80,17 +78,43 @@ public class GridManager : MonoBehaviour
 
     public void CheckIfTileIsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
     {
-        foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
+        foreach (TileScript tile in GetComponentsInChildren<TileScript>())
         {
-            tiles.IsWithinWalkingDistance(objPosition, obj);
+            tile.CheckIfTileIsWithinWalkingDistance(objPosition, obj);
+            Debug.Log("Tile checked");
+
+            if (obj.tag == "Enemy" && obj.GetComponent<Enemy>().RandomMovement && tile.IsWithinWalkingDistance)
+            {
+                tileID += 1;
+                Debug.Log("Adding tile " + tile.CurrentCellPositon + " to array");
+                availableTilesToEnemy[tileID] = tile;
+            }
         }
+
+        /*if (obj.tag == "Enemy" && obj.GetComponent<Enemy>().RandomMovement)
+        {
+            MoveEnemyToRandomGridPosition(obj);
+        }*/
     }
 
-    public void ResetTileColors()
+    public void MoveEnemyToRandomGridPosition(GameObject enemy)
+    {
+        int randomlyChosenTile = UnityEngine.Random.Range(0, availableTilesToEnemy.Length);
+
+        Vector3Int chosenTileCellPosition = availableTilesToEnemy[randomlyChosenTile].CurrentCellPositon;
+
+        Vector2Int chosenTargetPos = new Vector2Int(chosenTileCellPosition.x, chosenTileCellPosition.z);
+
+        MoveObjectOnGrid(enemy, chosenTargetPos);
+        tileID = -1;
+        Array.Clear(availableTilesToEnemy, 0, availableTilesToEnemy.Length);
+    }
+
+    public void ResetTiles()
     {
         foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
         {
-            tiles.ResetColor();
+            tiles.Reset();
         }
     }
 }
