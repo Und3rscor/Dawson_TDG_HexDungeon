@@ -114,7 +114,7 @@ public class Entity : MonoBehaviour
         {
             doneMoving = true;
 
-            if (!walkablesTilesChecked)
+            if (!walkablesTilesChecked && tag == "Player")
             {
                 gridManager.CheckIfTileIsWithinWalkingDistance(new Vector3(this.transform.position.x, 0, this.transform.position.z), this.gameObject);
 

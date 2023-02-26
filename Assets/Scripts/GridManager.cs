@@ -20,9 +20,6 @@ public class GridManager : MonoBehaviour
 
     private Vector3 objTargetGridPos, objTargetPos;
 
-    private int tileID = -1;
-    TileScript[] availableTilesToEnemy;
-
     private void Awake()
     {
         foreach (Transform tf in transform)
@@ -81,33 +78,7 @@ public class GridManager : MonoBehaviour
         foreach (TileScript tile in GetComponentsInChildren<TileScript>())
         {
             tile.CheckIfTileIsWithinWalkingDistance(objPosition, obj);
-            Debug.Log("Tile checked");
-
-            if (obj.tag == "Enemy" && obj.GetComponent<Enemy>().RandomMovement && tile.IsWithinWalkingDistance)
-            {
-                tileID += 1;
-                Debug.Log("Adding tile " + tile.CurrentCellPositon + " to array");
-                availableTilesToEnemy[tileID] = tile;
-            }
         }
-
-        /*if (obj.tag == "Enemy" && obj.GetComponent<Enemy>().RandomMovement)
-        {
-            MoveEnemyToRandomGridPosition(obj);
-        }*/
-    }
-
-    public void MoveEnemyToRandomGridPosition(GameObject enemy)
-    {
-        int randomlyChosenTile = UnityEngine.Random.Range(0, availableTilesToEnemy.Length);
-
-        Vector3Int chosenTileCellPosition = availableTilesToEnemy[randomlyChosenTile].CurrentCellPositon;
-
-        Vector2Int chosenTargetPos = new Vector2Int(chosenTileCellPosition.x, chosenTileCellPosition.z);
-
-        MoveObjectOnGrid(enemy, chosenTargetPos);
-        tileID = -1;
-        Array.Clear(availableTilesToEnemy, 0, availableTilesToEnemy.Length);
     }
 
     public void ResetTiles()
