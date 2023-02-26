@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
@@ -16,23 +17,39 @@ public class TileScript : MonoBehaviour
         get { return walkable; }
     }
 
+    private bool isWithinWalkingDistance;
+
+    private Vector3Int currentCellPositon;
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
         grid = GetComponentInParent<Grid>();
         gameManager = FindAnyObjectByType<GameManager>();
+
+        isWithinWalkingDistance = false;
+
+        currentCellPositon = grid.LocalToCell(transform.position);
+    }
+
+    public void IsWithinWalkingDistance(Vector3 objPosition)
+    {
+        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= player.ActionPoints)
+        {
+            Debug.Log("WithinDistance");
+            ChangeBorderColor(Color.blue);
+            isWithinWalkingDistance = true;
+        }
     }
 
     private void OnMouseDown()
     {
-        if (!player.Moving && this.transform.position != player.transform.position && player.ActionPoints != 0)
+        if (isWithinWalkingDistance && player.DoneMoving && this.transform.position != new Vector3(player.transform.position.x, 0, player.transform.position.z))
         {
-            Vector3Int currentCellPositon = grid.LocalToCell(transform.position);
             Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
             gameManager.MovePlayer(cellDisplacement);
             ChangeBorderColor(Color.white);
-            //Debug.Log(cellDisplacement.ToString());
         }
     }
 
@@ -47,9 +64,22 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    public void ResetColor()
+    {
+        if (player.TargetPos != new Vector3(this.transform.position.x, player.transform.position.y, this.transform.position.z))
+        {
+            ChangeBorderColor(Color.black);
+            isWithinWalkingDistance = false;
+        }
+        else
+        {
+            isWithinWalkingDistance = false;
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && !player.Moving)
+        if (other.tag == "Player" && player.DoneMoving)
         {
             ChangeBorderColor(Color.green);
         }
@@ -59,7 +89,7 @@ public class TileScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            ChangeBorderColor(Color.black);
+            ResetColor();
         }
     }
 }

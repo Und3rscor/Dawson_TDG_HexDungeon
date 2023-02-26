@@ -21,6 +21,7 @@ public class GridManager : MonoBehaviour
     private Dictionary<Vector2Int, TileScript> fullGrid = new Dictionary<Vector2Int, TileScript>();
 
     Player player;
+    private Vector3 objTargetGridPos, objTargetPos;
 
     private void Start()
     {
@@ -56,8 +57,13 @@ public class GridManager : MonoBehaviour
     {
         if (Walkable(ToGridCoord(targetPos)))
         {
-            obj.transform.position = grid.GetCellCenterLocal(targetPos);
-            Debug.Log("moving to" + targetPos);
+            objTargetGridPos = grid.GetCellCenterLocal(targetPos);
+            objTargetPos = new Vector3(objTargetGridPos.x, obj.transform.position.y, objTargetGridPos.z);
+
+            if (obj.tag == "Player")
+            {
+                player.TargetPos = objTargetPos;
+            }
             return true;
         }
 
@@ -74,6 +80,22 @@ public class GridManager : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void CheckIfTileIsWithinWalkingDistance(Vector3 objPosition)
+    {
+        foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
+        {
+            tiles.IsWithinWalkingDistance(objPosition);
+        }
+    }
+
+    public void ResetTileColors()
+    {
+        foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
+        {
+            tiles.ResetColor();
         }
     }
 }

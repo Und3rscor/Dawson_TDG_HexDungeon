@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259e4c2ca7a9c8f4583a9fa8e0f9309c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
 --- !u!4 &551468246
 Transform:
   m_ObjectHideFlags: 0
@@ -1836,6 +1837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerPlaceholder
       objectReference: {fileID: 0}
+    - target: {fileID: 2281292477713184292, guid: 38f039ab93d66ed48b0712db1aa0daa4, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2281292477713184295, guid: 38f039ab93d66ed48b0712db1aa0daa4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1958,7 +1963,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8049078528945912700}
   m_Enabled: 1
-  m_CellSize: {x: 2, y: 1, z: 2}
+  m_CellSize: {x: 2, y: 0, z: 2}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0

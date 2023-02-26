@@ -22,33 +22,46 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool moving;
-    public bool Moving
+    private bool doneMoving;
+    public bool DoneMoving
     {
-        get { return moving; }
+        get { return doneMoving; }
     }
 
-    private Vector3Int targetPos;
-    public Vector3Int TargetPos
+    private bool walkablesTilesChecked, tilesReset;
+
+    private Vector3 targetPos;
+    public Vector3 TargetPos
     {
+        get { return targetPos; }
+
         set
         {
-            if (!moving && targetPos != value)
-            {
-                targetPos = value;
-            }
+            targetPos = value;
+            distanceOfTargetPos = ((int)Vector3.Distance(this.transform.position, value))/2;
+            actionPoints -= distanceOfTargetPos;
         }
+    }
+
+    private int distanceOfTargetPos;
+    public int DistanceOfTargetPos
+    {
+        get { return distanceOfTargetPos; }
     }
 
     Slider apSlider;
     TextMeshProUGUI apCounter;
+    GridManager gridManager;
 
     // Start is called before the first frame update
     private void Start()
     {
         actionPoints = startingActionPoints;
-        targetPos = Vector3Int.FloorToInt(transform.position);
+        doneMoving = true;
+        targetPos = this.transform.position;
+        walkablesTilesChecked = false;
 
+        gridManager = FindObjectOfType<GridManager>();
         apCounter = GetComponentInChildren<TextMeshProUGUI>();
         apSlider = GetComponentInChildren<Slider>();
         apSlider.maxValue = startingActionPoints;
@@ -57,33 +70,46 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //PlayerControler();
+        Move();
+
         APTracker();
     }
 
-    private void PlayerControler()
+    public void Move()
     {
-        if (targetPos != Vector3Int.FloorToInt(transform.position))
+        if (!doneMoving && this.transform.position != targetPos)
         {
-            if (!moving)
-            {
-                actionPoints--;
-            }
-
-            //Move
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-            moving = true;
+            this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, speed * Time.deltaTime);
         }
 
-        if (moving && targetPos == Vector3Int.FloorToInt(transform.position) && actionPoints != 0)
+        if (this.transform.position == targetPos)
         {
-            moving = false;
+            doneMoving = true;
+
+            if (!walkablesTilesChecked)
+            {
+                gridManager.CheckIfTileIsWithinWalkingDistance(new Vector3(this.transform.position.x, 0, this.transform.position.z));
+                walkablesTilesChecked = true;
+                tilesReset = false;
+            }
+        }
+        else
+        {
+            doneMoving = false;
+            if (!tilesReset)
+            {
+                gridManager.ResetTileColors();
+                Debug.Log("Tile colors reset");
+                tilesReset = true;
+                walkablesTilesChecked = false;
+            }
         }
     }
 
     public void ResetActionPoints()
     {
         actionPoints = startingActionPoints;
+        walkablesTilesChecked = false;
     }
 
     private void APTracker()
