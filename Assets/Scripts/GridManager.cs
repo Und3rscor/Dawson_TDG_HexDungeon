@@ -14,9 +14,6 @@ public class GridManager : MonoBehaviour
     private Vector2Int startPoint;
 
     [SerializeField]
-    private Vector2Int endPoint;
-
-    [SerializeField]
     // private List<GridCell> _fullGrid = new List<GridCell>();
     private Dictionary<Vector2Int, TileScript> fullGrid = new Dictionary<Vector2Int, TileScript>();
 
@@ -61,7 +58,7 @@ public class GridManager : MonoBehaviour
             objTargetGridPos = grid.GetCellCenterLocal(targetPos);
             objTargetPos = new Vector3(objTargetGridPos.x, obj.transform.position.y, objTargetGridPos.z);
 
-            obj.GetComponent<EntityMovement>().TargetPos = objTargetPos;
+            obj.GetComponent<Entity>().TargetPos = objTargetPos;
             return true;
         }
 

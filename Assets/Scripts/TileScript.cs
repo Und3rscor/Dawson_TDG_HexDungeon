@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
-    EntityMovement playerEMScript;
+    Entity playerEScript;
     GameObject playerObj;
     Grid grid;
     GameManager gameManager;
@@ -24,8 +24,8 @@ public class TileScript : MonoBehaviour
 
     private void Start()
     {
-        playerEMScript = FindObjectOfType<Player>().gameObject.GetComponent<EntityMovement>();
-        playerObj = playerEMScript.gameObject;
+        playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
+        playerObj = playerEScript.gameObject;
 
         grid = GetComponentInParent<Grid>();
         gameManager = FindObjectOfType<GameManager>();
@@ -39,7 +39,7 @@ public class TileScript : MonoBehaviour
     public void IsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
     {
         //Checks if within distance of the player and marks it accordingly
-        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= obj.GetComponent<EntityMovement>().ActionPoints)
+        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= obj.GetComponent<Entity>().ActionPoints)
         {
             isWithinWalkingDistance = true;
 
@@ -53,7 +53,7 @@ public class TileScript : MonoBehaviour
     //Defines a target position for the player
     private void OnMouseDown()
     {
-        if (isWithinWalkingDistance && playerEMScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
+        if (gameManager.PlayerTurn && isWithinWalkingDistance && playerEScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
         {
             Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
@@ -76,7 +76,7 @@ public class TileScript : MonoBehaviour
     public void ResetColor()
     {
         //Makes all the tiles black except the one the player is trying to reach
-        if (playerObj.GetComponent<EntityMovement>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))
+        if (playerObj.GetComponent<Entity>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))
         {
             ChangeBorderColor(Color.black);
             isWithinWalkingDistance = false;
@@ -89,7 +89,7 @@ public class TileScript : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //When the player stays on a tile, makes it green
-        if (other.GetComponent<EntityMovement>().DoneMoving)
+        if (other.GetComponent<Entity>().DoneMoving)
         {
             if (other.tag == "Player")
             {

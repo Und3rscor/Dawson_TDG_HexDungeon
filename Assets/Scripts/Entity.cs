@@ -1,13 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
-public class EntityMovement : MonoBehaviour
+public class Entity : MonoBehaviour
 {
-    public float speed;
+    [Header("Health")]
+    [SerializeField]
+    private int startingHealth;
+    public int StartingHealth
+    {
+        get { return startingHealth; }
+    }
 
+    private int health;
+    public int Health
+    {
+        get { return health; }
+    }
+
+    [Header("Action Points")]
     [SerializeField]
     private int startingActionPoints;
     public int StartingActionPoins
@@ -19,20 +34,16 @@ public class EntityMovement : MonoBehaviour
     public int ActionPoints
     {
         get { return actionPoints; }
-
-        set
-        {
-            actionPoints = value;
-        }
     }
+
+    [Header("Movement")]
+    public float speed;
 
     private bool doneMoving;
     public bool DoneMoving
     {
         get { return doneMoving; }
     }
-
-    private bool walkablesTilesChecked;
 
     private Vector3 targetPos;
     public Vector3 TargetPos
@@ -53,24 +64,59 @@ public class EntityMovement : MonoBehaviour
         get { return distanceOfTargetPos; }
     }
 
+    private bool walkablesTilesChecked;
+
+    GameManager gameManager;
     GridManager gridManager;
+
+    Slider[] sliders;
+    Slider hpSlider, apSlider;
+    TextMeshProUGUI apCounter;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        gridManager = gameManager.gameObject.GetComponent<GridManager>();
+
+        apCounter = GetComponentInChildren<TextMeshProUGUI>();
+        sliders = GetComponentsInChildren<Slider>();
+
+        hpSlider = sliders[0];
+        hpSlider.maxValue = startingHealth;
+        health = startingHealth;
+
+        apSlider = sliders[1];
+        apSlider.maxValue = startingActionPoints;
         actionPoints = startingActionPoints;
+
         doneMoving = true;
         targetPos = this.transform.position;
-        walkablesTilesChecked = false;
-
-        gridManager = FindObjectOfType<GridManager>();
+        walkablesTilesChecked = false;        
     }
 
     private void Update()
     {
-        Move();
+        if (this.tag == "Player" && gameManager.PlayerTurn)
+        {
+            PlayOnYourTurn();
+        }
+
+        if (this.tag == "Enemy" && !gameManager.PlayerTurn)
+        {
+            PlayOnYourTurn();
+        }
+        
+        HPTracker();
     }
 
-    public void Move()
+    private void PlayOnYourTurn()
+    {
+        Move();
+
+        APTracker();
+    }
+
+    private void Move()
     {
         if (!doneMoving && this.transform.position != targetPos)
         {
@@ -106,5 +152,16 @@ public class EntityMovement : MonoBehaviour
     {
         actionPoints = startingActionPoints;
         walkablesTilesChecked = false;
+    }
+
+    private void HPTracker()
+    {
+        hpSlider.value = health;
+    }
+
+    private void APTracker()
+    {
+        apSlider.value = actionPoints;
+        apCounter.text = actionPoints.ToString();
     }
 }

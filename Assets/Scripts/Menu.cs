@@ -18,17 +18,14 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartGame()
+    /*public void StartGame()
     {
-        //Tells the game manager to start the game
-        GameObject.Find("GameManager").GetComponent<GameManager>().start = true;
-
         //Removes the Opening UI
         openingUi.SetActive(false);
 
         //Add the game Ui
         gameUi.SetActive(true);
-    }
+    }*/
 
     public void MainMenu()
     {

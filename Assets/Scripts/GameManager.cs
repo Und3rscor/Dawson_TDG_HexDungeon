@@ -5,17 +5,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    EntityMovement playerEMScript;
+    Entity playerEScript;
     GridManager gridManager;
 
-    public bool start;
+    private bool playerTurn;
+    public bool PlayerTurn
+    {
+        get { return playerTurn; }
+    }
 
     static GameManager instance;
 
     private void Start()
     {
-        playerEMScript = FindObjectOfType<Player>().gameObject.GetComponent<EntityMovement>();
+        playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
         gridManager = FindObjectOfType<GridManager>();
+
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        GameObject.DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -26,13 +39,21 @@ public class GameManager : MonoBehaviour
     //Tells the gridmanager to move the player
     public void MovePlayer(Vector2Int displacement)
     {
-        gridManager.MoveObjectOnGrid(playerEMScript.gameObject, displacement);
+        gridManager.MoveObjectOnGrid(playerEScript.gameObject, displacement);
     }
 
     //Ends the player turn
     public void EndTurn()
     {
-        //Resets player AP
-        playerEMScript.ResetActionPoints();
+        if (playerTurn)
+        {
+            //Resets enemy AP
+            
+        }
+        else
+        {
+            //Resets player AP
+            playerEScript.ResetActionPoints();
+        }        
     }
 }
