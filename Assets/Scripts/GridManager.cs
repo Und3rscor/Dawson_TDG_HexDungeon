@@ -36,6 +36,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    //Converts a position into a grid position
     private Vector2Int ToGridCoord(Vector3Int vect)
     {
         return new Vector2Int(vect.x, vect.z);
@@ -60,10 +61,7 @@ public class GridManager : MonoBehaviour
             objTargetGridPos = grid.GetCellCenterLocal(targetPos);
             objTargetPos = new Vector3(objTargetGridPos.x, obj.transform.position.y, objTargetGridPos.z);
 
-            if (obj.tag == "Player")
-            {
-                player.TargetPos = objTargetPos;
-            }
+            obj.GetComponent<EntityMovement>().TargetPos = objTargetPos;
             return true;
         }
 
@@ -83,11 +81,11 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void CheckIfTileIsWithinWalkingDistance(Vector3 objPosition)
+    public void CheckIfTileIsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
     {
         foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
         {
-            tiles.IsWithinWalkingDistance(objPosition);
+            tiles.IsWithinWalkingDistance(objPosition, obj);
         }
     }
 

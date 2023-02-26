@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
-    Player player;
+    EntityMovement playerEMScript;
+    GameObject playerObj;
     Grid grid;
     GameManager gameManager;
 
@@ -23,7 +24,9 @@ public class TileScript : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<Player>();
+        playerEMScript = FindObjectOfType<Player>().gameObject.GetComponent<EntityMovement>();
+        playerObj = playerEMScript.gameObject;
+
         grid = GetComponentInParent<Grid>();
         gameManager = FindObjectOfType<GameManager>();
 
@@ -32,19 +35,25 @@ public class TileScript : MonoBehaviour
         currentCellPositon = grid.LocalToCell(transform.position);
     }
 
-    public void IsWithinWalkingDistance(Vector3 objPosition)
+    //Checks for tiles within walking distance of an object based on their remaining AP
+    public void IsWithinWalkingDistance(Vector3 objPosition, GameObject obj)
     {
-        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= player.ActionPoints)
+        //Checks if within distance of the player and marks it accordingly
+        if (this.transform.position != objPosition && ((int)Vector3.Distance(this.transform.position, objPosition)/2) <= obj.GetComponent<EntityMovement>().ActionPoints)
         {
-            Debug.Log("WithinDistance");
-            ChangeBorderColor(Color.blue);
             isWithinWalkingDistance = true;
+
+            if (obj.tag == "Player")
+            {
+                ChangeBorderColor(Color.blue);
+            } 
         }
     }
 
+    //Defines a target position for the player
     private void OnMouseDown()
     {
-        if (isWithinWalkingDistance && player.DoneMoving && this.transform.position != new Vector3(player.transform.position.x, 0, player.transform.position.z))
+        if (isWithinWalkingDistance && playerEMScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
         {
             Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
@@ -66,7 +75,8 @@ public class TileScript : MonoBehaviour
 
     public void ResetColor()
     {
-        if (player.TargetPos != new Vector3(this.transform.position.x, player.transform.position.y, this.transform.position.z))
+        //Makes all the tiles black except the one the player is trying to reach
+        if (playerObj.GetComponent<EntityMovement>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))
         {
             ChangeBorderColor(Color.black);
             isWithinWalkingDistance = false;
@@ -76,20 +86,25 @@ public class TileScript : MonoBehaviour
             isWithinWalkingDistance = false;
         }
     }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && player.DoneMoving)
+        //When the player stays on a tile, makes it green
+        if (other.GetComponent<EntityMovement>().DoneMoving)
         {
-            ChangeBorderColor(Color.green);
-        }
-    }
+            if (other.tag == "Player")
+            {
+                ChangeBorderColor(Color.green);
+            }
+            
+            if (other.tag == "Enemy")
+            {
+                ChangeBorderColor(Color.red);
+            }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            ResetColor();
+            if (other.tag == "Obstacle")
+            {
+                ChangeBorderColor(Color.clear);
+            }
         }
     }
 }

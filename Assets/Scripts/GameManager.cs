@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    Player player;
+    EntityMovement playerEMScript;
     GridManager gridManager;
 
     public bool start;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<Player>();
+        playerEMScript = FindObjectOfType<Player>().gameObject.GetComponent<EntityMovement>();
         gridManager = FindObjectOfType<GridManager>();
     }
 
@@ -23,13 +23,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //Tells the gridmanager to move the player
     public void MovePlayer(Vector2Int displacement)
     {
-        gridManager.MoveObjectOnGrid(player.gameObject, displacement);
+        gridManager.MoveObjectOnGrid(playerEMScript.gameObject, displacement);
     }
 
+    //Ends the player turn
     public void EndTurn()
     {
-        player.ResetActionPoints();
+        //Resets player AP
+        playerEMScript.ResetActionPoints();
     }
 }
