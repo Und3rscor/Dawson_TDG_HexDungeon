@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1300128576009736473}
   - component: {fileID: 4442792238018588976}
   - component: {fileID: 2331319892591031260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (4)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4148238662034323655}
   - component: {fileID: 1914968076511231177}
   - component: {fileID: 6991440813027333191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (6)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4627845730284787392}
   - component: {fileID: 1115697614965054031}
   - component: {fileID: 6612825208627129363}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (7)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3570563723708567438}
   - component: {fileID: 4163376559250804643}
   - component: {fileID: 5189974266083442537}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (1)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4947156839151369945}
   - component: {fileID: 2651659276228123150}
   - component: {fileID: 8253118255036038125}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (3)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 5203671741298262421}
   - component: {fileID: 5203671741299556789}
   - component: {fileID: 5203671741300687733}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 6348631251719078952}
   - component: {fileID: 4350676414350290096}
   - component: {fileID: 7846158621309417346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (5)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 6697613793838230786}
   - component: {fileID: 5293635457974725084}
   - component: {fileID: 4280393705115609846}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: greek_roof_support_1 (2)
   m_TagString: Borders
   m_Icon: {fileID: 0}
@@ -674,9 +674,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2810827127507349521}
   - component: {fileID: 7705239934680625167}
-  - component: {fileID: -1025810885613621923}
-  - component: {fileID: 294137489859534885}
-  m_Layer: 0
+  - component: {fileID: -3819669201383518625}
+  - component: {fileID: -4478596193269265416}
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 1
---- !u!54 &-1025810885613621923
+--- !u!65 &-3819669201383518625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9145594720427623966}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &-4478596193269265416
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -747,27 +768,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &294137489859534885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9145594720427623966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &207162026529797654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,6 +779,10 @@ PrefabInstance:
     - target: {fileID: 1411812297518896, guid: 34d863027af504a739927df283d50f54, type: 3}
       propertyPath: m_Name
       value: greek_floor_stone_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411812297518896, guid: 34d863027af504a739927df283d50f54, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4580090544687836, guid: 34d863027af504a739927df283d50f54, type: 3}
       propertyPath: m_RootOrder

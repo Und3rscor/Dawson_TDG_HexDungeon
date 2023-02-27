@@ -19,9 +19,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.PlayerTurn)
-        {
-            entity.PlayOnYourTurn();
-        }
+        entity.PlayOnYourTurn();
     }
 }

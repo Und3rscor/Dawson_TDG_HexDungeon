@@ -30,6 +30,8 @@ public class TileScript : MonoBehaviour
         get { return currentCellPositon;}
     }
 
+    private bool occupied;
+
     private void Start()
     {
         playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
@@ -62,7 +64,7 @@ public class TileScript : MonoBehaviour
     //Defines a target position for the player
     private void OnMouseDown()
     {
-        if (gameManager.PlayerTurn && isWithinWalkingDistance && playerEScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
+        if (isWithinWalkingDistance && playerEScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
         {
             Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
@@ -82,10 +84,10 @@ public class TileScript : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetTile()
     {
         //Makes all the tiles black except the one the player is trying to reach
-        if (playerObj.GetComponent<Entity>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))
+        if (!occupied && playerObj.GetComponent<Entity>().TargetPos != new Vector3(this.transform.position.x, playerObj.transform.position.y, this.transform.position.z))
         {
             ChangeBorderColor(Color.black);
             isWithinWalkingDistance = false;
@@ -95,25 +97,33 @@ public class TileScript : MonoBehaviour
             isWithinWalkingDistance = false;
         }
     }
+
+    private void SetColorToObjectColor(Collider other)
+    {
+        Color entityColor = other.GetComponent<MeshRenderer>().material.color;
+        ChangeBorderColor(entityColor);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         //When the player stays on a tile, makes it green
-        if (other.GetComponent<Entity>().DoneMoving)
+        if (other.tag == "Player" && other.GetComponent<Entity>().DoneMoving)
         {
-            if (other.tag == "Player")
-            {
-                ChangeBorderColor(Color.green);
-            }
-            
-            if (other.tag == "Enemy")
-            {
-                ChangeBorderColor(Color.red);
-            }
+            ChangeBorderColor(Color.green);
+            occupied = false;
+        }
+        
+        if (other.tag == "Enemy" || other.tag == "Barrel")
+        {
+            SetColorToObjectColor(other);
+            isWithinWalkingDistance = false;
+            occupied = true;
+        }
 
-            if (other.tag == "Obstacle")
-            {
-                ChangeBorderColor(Color.clear);
-            }
+        if (other.tag == "PickUp")
+        {
+            SetColorToObjectColor(other);
+            occupied = true;
         }
     }
 }

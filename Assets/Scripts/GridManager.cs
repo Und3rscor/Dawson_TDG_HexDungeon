@@ -85,7 +85,7 @@ public class GridManager : MonoBehaviour
     {
         foreach (TileScript tiles in GetComponentsInChildren<TileScript>())
         {
-            tiles.Reset();
+            tiles.ResetTile();
         }
     }
 }

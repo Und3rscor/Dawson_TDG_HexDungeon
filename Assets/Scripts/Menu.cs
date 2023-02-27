@@ -29,6 +29,6 @@ public class Menu : MonoBehaviour
 
     public void MainMenu()
     {
-        GameObject.Find("GameManager").GetComponent<SceneManagementScript>().GoBackToMainMenu();
+        GameObject.Find("GameManager").GetComponent<GameManager>().GoBackToMainMenu();
     }
 }

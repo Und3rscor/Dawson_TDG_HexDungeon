@@ -20,6 +20,8 @@ public class Entity : MonoBehaviour
     public int Health
     {
         get { return health; }
+
+        set { health = value; }
     }
 
     [Header("Action Points")]
@@ -35,6 +37,16 @@ public class Entity : MonoBehaviour
     {
         get { return actionPoints; }
     }
+
+    [Header("Combat")]
+    [SerializeField]
+    private int attackDamage;
+    public int AttackDamage
+    {
+        get { return attackDamage; }
+    }
+
+    private bool isAttacking;
 
     [Header("Movement")]
     public float speed;
@@ -67,6 +79,8 @@ public class Entity : MonoBehaviour
     private bool walkablesTilesChecked;
 
     GridManager gridManager;
+    GameManager gameManager;
+    Animator animator;
 
     Slider[] sliders;
     Slider hpSlider, apSlider;
@@ -75,7 +89,9 @@ public class Entity : MonoBehaviour
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+        gameManager = FindObjectOfType<GameManager>();
 
+        animator = GetComponentInChildren<Animator>();
         apCounter = GetComponentInChildren<TextMeshProUGUI>();
         sliders = GetComponentsInChildren<Slider>();
 
@@ -88,7 +104,8 @@ public class Entity : MonoBehaviour
         actionPoints = startingActionPoints;
 
         targetPos = this.transform.position;
-        walkablesTilesChecked = false;        
+        walkablesTilesChecked = false;
+        isAttacking = false;
     }
 
     private void Update()
@@ -107,6 +124,7 @@ public class Entity : MonoBehaviour
     {
         if (!doneMoving && this.transform.position != targetPos)
         {
+            transform.LookAt(targetPos);
             this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, speed * Time.deltaTime);
         }
 
@@ -133,6 +151,30 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void Attack(Transform target)
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+
+            transform.LookAt(target);
+
+            animator.SetBool("Attack", true);
+            Invoke("ResetAttack", .5f);
+
+            actionPoints -= 2;
+
+            gridManager.ResetTiles();
+            walkablesTilesChecked = false;
+        }
+    }
+
+    private void ResetAttack()
+    {
+        animator.SetBool("Attack", false);
+        isAttacking = false;
+    }
+
     public void ResetActionPoints()
     {
         actionPoints = startingActionPoints;
@@ -142,6 +184,11 @@ public class Entity : MonoBehaviour
     private void HPTracker()
     {
         hpSlider.value = health;
+
+        if (health <= 0)
+        {
+            gameManager.ReloadScene();
+        }
     }
 
     private void APTracker()
