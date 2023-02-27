@@ -12,9 +12,7 @@ public class GridManager : MonoBehaviour
     private Vector2Int gridSize;
 
     [SerializeField]
-    private Vector2Int startPoint;
-
-    [SerializeField]
+    //private Vector2Int startPoint;
     // private List<GridCell> _fullGrid = new List<GridCell>();
     private Dictionary<Vector2Int, TileScript> fullGrid = new Dictionary<Vector2Int, TileScript>();
 

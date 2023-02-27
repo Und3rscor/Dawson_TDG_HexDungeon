@@ -7,17 +7,16 @@ public class Enemy : MonoBehaviour
 {
     [Header("Enemy Only")]
     [SerializeField]
-    Animator animator;
-
-    [SerializeField]
     private int attackDamage;
 
     private bool isAttacking;
 
+    Animator animator;
+
 
     [Header("Barrel Only")]
     [SerializeField]
-    private GameObject bananaObj;
+    private GameObject droppedObj;
 
     [SerializeField]
     private int health;
@@ -91,7 +90,7 @@ public class Enemy : MonoBehaviour
     private void DestroyBarrel()
     {
         gameManager.score += 10;
-        GameObject banana = Instantiate(bananaObj, this.transform);
+        GameObject banana = Instantiate(droppedObj, this.transform);
         banana.transform.parent = null;
         Destroy(gameObject);
     }
