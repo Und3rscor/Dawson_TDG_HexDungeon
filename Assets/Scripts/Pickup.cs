@@ -25,6 +25,7 @@ public class Pickup : MonoBehaviour
 
             if (tag == "EndZone")
             {
+                Debug.Log("Reached EndZone");
                 gameManager.LoadNext();
             }
         }

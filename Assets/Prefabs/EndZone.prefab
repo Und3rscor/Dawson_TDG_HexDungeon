@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2799123851183873431}
   m_Layer: 0
   m_Name: EndZone
-  m_TagString: PickUp
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7566612199799306426}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &288652724271172258
 MeshRenderer:
