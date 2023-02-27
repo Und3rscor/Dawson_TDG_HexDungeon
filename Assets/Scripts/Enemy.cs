@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
 
         if (this.tag == "Enemy")
@@ -90,6 +90,7 @@ public class Enemy : MonoBehaviour
 
     private void DestroyBarrel()
     {
+        gameManager.score += 10;
         GameObject banana = Instantiate(bananaObj, this.transform);
         banana.transform.parent = null;
         Destroy(gameObject);

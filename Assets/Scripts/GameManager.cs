@@ -10,9 +10,21 @@ public class GameManager : MonoBehaviour
     private int previousScore = 0;
 
     private float currentTimer = 0;
+    public float CurrentTimer
+    {
+        get { return currentTimer; }
+    }
+
+    private int deaths;
+    public int Deaths { get { return deaths; } }
+
     public bool start;
 
     private int currentScene;
+    public int CurrentScene
+    {
+        get { return currentScene; }
+    }
 
     private bool endTurnAvailable;
     public bool EndTurnAvailable
@@ -31,6 +43,7 @@ public class GameManager : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
 
         endTurnAvailable = true;
+        deaths = 0;
 
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
@@ -98,6 +111,7 @@ public class GameManager : MonoBehaviour
         score = previousScore;
         start = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        deaths++;
     }
 
     public void GoBackToMainMenu()

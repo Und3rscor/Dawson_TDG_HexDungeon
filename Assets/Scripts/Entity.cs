@@ -89,7 +89,7 @@ public class Entity : MonoBehaviour
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         animator = GetComponentInChildren<Animator>();
         apCounter = GetComponentInChildren<TextMeshProUGUI>();

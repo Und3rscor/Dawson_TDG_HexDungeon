@@ -10,7 +10,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         button = GetComponentInChildren<Button>();
     }
 

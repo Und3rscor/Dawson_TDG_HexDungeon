@@ -38,7 +38,7 @@ public class TileScript : MonoBehaviour
         playerObj = playerEScript.gameObject;
 
         grid = GetComponentInParent<Grid>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         isWithinWalkingDistance = false;
 
@@ -120,7 +120,7 @@ public class TileScript : MonoBehaviour
             occupied = true;
         }
 
-        if (other.tag == "PickUp")
+        if (other.tag == "PickUp" || other.tag == "EndZone")
         {
             SetColorToObjectColor(other);
             occupied = true;
