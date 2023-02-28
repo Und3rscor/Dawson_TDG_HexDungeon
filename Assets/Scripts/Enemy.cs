@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
 
     private bool isAttacking;
 
+    [SerializeField]
+    private int scoreDrops = 100;
+
     Animator animator;
 
 
@@ -83,7 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        gameManager.score += 100;
+        gameManager.score += scoreDrops;
         Destroy(gameObject);
     }
 
