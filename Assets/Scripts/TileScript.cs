@@ -78,6 +78,12 @@ public class TileScript : MonoBehaviour
             {
                 playerEScript.Attack(occupiedBy.transform);
                 occupiedBy.GetComponent<Enemy>().Health -= playerEScript.AttackDamage;
+
+                if (occupiedBy.GetComponent<Enemy>().Health <= 0)
+                {
+                    occupied = false;
+                    occupiedBy = null;
+                }
             }
         }
     }
