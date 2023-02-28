@@ -119,9 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ff01e9078c948489c3c9ba3a774652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   attackDamage: 0
-  bananaObj: {fileID: 334463699810398466, guid: 4c00944e92df52d44831938d687b90ec, type: 3}
+  droppedObj: {fileID: 334463699810398466, guid: 4c00944e92df52d44831938d687b90ec, type: 3}
   health: 1
 --- !u!1 &5847347164937911666
 GameObject:
