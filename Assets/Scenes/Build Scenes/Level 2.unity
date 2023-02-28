@@ -575,11 +575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7006375337296071791, guid: 5a88d4acae53b274aac43e0fe133028a, type: 3}
       propertyPath: m_text
-      value: '*Description*'
+      value: Welcome to level 2. Nothing too fancy. Go!
       objectReference: {fileID: 0}
     - target: {fileID: 7006375337296071791, guid: 5a88d4acae53b274aac43e0fe133028a, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 66.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
