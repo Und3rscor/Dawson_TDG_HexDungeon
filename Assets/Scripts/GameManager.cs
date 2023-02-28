@@ -32,46 +32,54 @@ public class GameManager : MonoBehaviour
         get { return endTurnAvailable; }
     }
 
+    public GameObject playerObj;
     Entity playerEScript;
-    GridManager gridManager;
 
     static GameManager instance;
 
     private void Start()
     {
-        playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
-        gridManager = FindObjectOfType<GridManager>();
+        playerEScript = GameObject.Find("Player").GetComponent<Entity>();
+        playerObj = playerEScript.gameObject;
 
         endTurnAvailable = true;
         deaths = 0;
 
         currentScene = SceneManager.GetActiveScene().buildIndex;
+    }
 
-        if (instance != null)
+    private void Awake()
+    {
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
         instance = this;
-        GameObject.DontDestroyOnLoad(gameObject);
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
     {
+        if (playerObj == null)
+        {
+            playerEScript = GameObject.Find("Player").GetComponent<Entity>();
+            playerObj = playerEScript.gameObject;
+        }
+
         if (start)
             Timer();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LoadNext();
+        }
     }
 
     void Timer()
     {
         currentTimer += Time.deltaTime;
-    }
-
-    //Tells the gridmanager to move the player
-    public void MovePlayer(Vector2Int displacement)
-    {
-        gridManager.MoveObjectOnGrid(playerEScript.gameObject, displacement);
     }
 
     //Ends the player turn
@@ -102,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
         previousScore = score;
         start = false;
+
         currentScene = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -116,7 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void GoBackToMainMenu()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene("MainMenu");
         Destroy(gameObject);
     }
 }

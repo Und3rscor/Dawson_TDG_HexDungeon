@@ -35,7 +35,7 @@ public class TileScript : MonoBehaviour
 
     private void Start()
     {
-        playerEScript = FindObjectOfType<Player>().gameObject.GetComponent<Entity>();
+        playerEScript = FindObjectOfType<Entity>();
         playerObj = playerEScript.gameObject;
 
         grid = GetComponentInParent<Grid>();
@@ -71,7 +71,7 @@ public class TileScript : MonoBehaviour
             {
                 Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
-                gameManager.MovePlayer(cellDisplacement);
+                grid.gameObject.GetComponent<GridManager>().MoveObjectOnGrid(playerEScript.gameObject, cellDisplacement);
                 ChangeBorderColor(Color.white);
             }
             else if (occupied && playerEScript.ActionPoints >= 2 && Vector3.Distance(occupiedBy.transform.position, playerObj.transform.position) <= 3)

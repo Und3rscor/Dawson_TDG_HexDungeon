@@ -111,16 +111,11 @@ public class Entity : MonoBehaviour
     private void Update()
     {        
         HPTracker();
-    }
-
-    public void PlayOnYourTurn()
-    {
-        Move();
 
         APTracker();
     }
 
-    private void Move()
+    public void Move()
     {
         if (!doneMoving && this.transform.position != targetPos)
         {
@@ -178,6 +173,7 @@ public class Entity : MonoBehaviour
     public void ResetActionPoints()
     {
         actionPoints = startingActionPoints;
+        Debug.Log(actionPoints.ToString());
         walkablesTilesChecked = false;
     }
 

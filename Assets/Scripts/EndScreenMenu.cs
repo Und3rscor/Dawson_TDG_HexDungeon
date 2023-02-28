@@ -15,6 +15,6 @@ public class EndScreenMenu : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //Scoreboard changes
-        scoreboard.GetComponent<TextMeshProUGUI>().text = "Time: " + gameManager.CurrentTimer.ToString("f2") + "     Score: " + gameManager.score + "     Deaths: " + (3 - gameManager.Deaths);
+        scoreboard.GetComponent<TextMeshProUGUI>().text = "Time: " + gameManager.CurrentTimer.ToString("f2") + "     Score: " + gameManager.score + "     Deaths: " + (gameManager.Deaths);
     }
 }
