@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private int health;
+    public int Health
+    {
+        get { return health; } set { health = value; }
+    }
 
     Entity player;
     GameManager gameManager;
@@ -41,12 +45,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1) && player.ActionPoints >= 2)
-        {
-            player.Attack(this.transform);
-            this.health -= player.AttackDamage;
-        }
-
         if (health <= 0)
         {
             if (tag == "Barrel")

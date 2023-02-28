@@ -361,9 +361,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ff01e9078c948489c3c9ba3a774652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   attackDamage: 4
-  bananaObj: {fileID: 0}
+  scoreDrops: 100
+  droppedObj: {fileID: 0}
   health: 5
 --- !u!1 &7603516043233405934
 GameObject:

@@ -31,6 +31,7 @@ public class TileScript : MonoBehaviour
     }
 
     private bool occupied;
+    private GameObject occupiedBy;
 
     private void Start()
     {
@@ -64,12 +65,20 @@ public class TileScript : MonoBehaviour
     //Defines a target position for the player
     private void OnMouseDown()
     {
-        if (isWithinWalkingDistance && playerEScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
+        if (playerEScript.DoneMoving && this.transform.position != new Vector3(playerObj.transform.position.x, 0, playerObj.transform.position.z))
         {
-            Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
+            if (isWithinWalkingDistance)
+            {
+                Vector2Int cellDisplacement = new Vector2Int(currentCellPositon.x, currentCellPositon.z);
 
-            gameManager.MovePlayer(cellDisplacement);
-            ChangeBorderColor(Color.white);
+                gameManager.MovePlayer(cellDisplacement);
+                ChangeBorderColor(Color.white);
+            }
+            else if (occupied && playerEScript.ActionPoints >= 2 && Vector3.Distance(occupiedBy.transform.position, playerObj.transform.position) <= 3)
+            {
+                playerEScript.Attack(occupiedBy.transform);
+                occupiedBy.GetComponent<Enemy>().Health -= playerEScript.AttackDamage;
+            }
         }
     }
 
@@ -118,6 +127,7 @@ public class TileScript : MonoBehaviour
             SetColorToObjectColor(other);
             isWithinWalkingDistance = false;
             occupied = true;
+            occupiedBy = other.gameObject;
         }
 
         if (other.tag == "PickUp" || other.tag == "EndZone")
