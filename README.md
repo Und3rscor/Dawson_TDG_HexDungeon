@@ -1,5 +1,6 @@
 # Dawson_HexDungeon
  
-Github By Pierre B
+Team Member TDG PROJECT : 
+Logan / Shiva / Pierre
 
 Game Design class Project #1
