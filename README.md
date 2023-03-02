@@ -10,4 +10,4 @@ attack occupied tile (2ap)
 WASD to move camera
 Escape to skip level
 
-Game Design class Project #1
+
